@@ -61,7 +61,7 @@ export const SliderWrapper = ({ slides }: SliderProps) => {
   return (
     <div className="tw-bg-blue-400">
       <div
-        className="slider-wrapper tw-h-[400px] tw-relative"
+        className="slider-wrapper tw-relative tw-h-[400px]"
         onMouseEnter={handlePause}
         onMouseLeave={handlePause}
       >
