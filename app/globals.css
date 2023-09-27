@@ -8,7 +8,7 @@
 }
 
 .slide.active {
-  z-index: 99; /* ensure active slide is always on top */
+  z-index: 50; /* ensure active slide is always on top */
 }
 
 .slide:not(.active) {

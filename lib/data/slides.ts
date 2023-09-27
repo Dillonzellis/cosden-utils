@@ -3,6 +3,8 @@ export const slides = [
     header: "header 1",
     body: "body 1",
     imgSrc: "https://www.cosden.org/images/banners/2023/refinance-sept2023.png",
+    btnText: "learn more",
+    btnLink: "/",
   },
   {
     header: "header 2",
@@ -19,4 +21,13 @@ export const slides = [
     body: "body 4",
     imgSrc: "https://www.cosden.org/images/banners/education.jpg",
   },
-] as const;
+];
+
+export type SlideData = {
+  dark?: boolean;
+  header?: string;
+  body?: string;
+  imgSrc: string;
+  btnText?: string;
+  btnLink?: string;
+};

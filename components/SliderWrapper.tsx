@@ -9,13 +9,37 @@ type SliderProps = {
   slides: typeof slides;
 };
 
+type SlideButtonsProps = React.HTMLAttributes<HTMLButtonElement> & {
+  onClick: () => void;
+  side: "left" | "right";
+};
+
+const SlideButtons = ({ onClick, children, side }: SlideButtonsProps) => {
+  let sideClass;
+  if (side === "left") {
+    sideClass = "tw-left-[2%]";
+  }
+
+  if (side === "right") {
+    sideClass = "tw-right-[2%]";
+  }
+  return (
+    <button
+      className={`tw-absolute tw-top-1/2 tw-z-[99] tw-hidden tw-text-xl tw-text-red-400 md:tw-block ${sideClass}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
 export const SliderWrapper = ({ slides }: SliderProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const slideIntervalRef = useRef<number | null>(null);
   const pauseTimeoutRef = useRef<number | null>(null);
 
-  const timer = 6000;
+  const timer = 2000;
 
   const startInterval = () => {
     if (slideIntervalRef.current) clearInterval(slideIntervalRef.current);
@@ -59,7 +83,7 @@ export const SliderWrapper = ({ slides }: SliderProps) => {
   }, [isPaused, slides]);
 
   return (
-    <div className="tw-bg-blue-400">
+    <div className="tw-bg-black">
       <div
         className="slider-wrapper tw-relative tw-h-[400px]"
         onMouseEnter={handlePause}
@@ -69,12 +93,12 @@ export const SliderWrapper = ({ slides }: SliderProps) => {
           <Slide key={index} active={index === currentSlide} {...slide} />
         ))}
       </div>
-      <button className="prev tw-z-50 tw-text-black" onClick={prevSlide}>
-        Previous
-      </button>
-      <button className="next tw-z-50 tw-text-black" onClick={nextSlide}>
-        Next
-      </button>
+      <SlideButtons onClick={prevSlide} side="left">
+        previous
+      </SlideButtons>
+      <SlideButtons onClick={nextSlide} side="right">
+        next
+      </SlideButtons>
     </div>
   );
 };
